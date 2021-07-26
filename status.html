@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ricardo.wtf</title>
+    <link style="border-radius: 50px;" rel="icon" href="./assets/discordpfpStill.png" type="image/icon type">
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-a11y="true"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/brands.js" data-auto-a11y="true"></script>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/bulma.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="guild-container">
+            <div class="guild mt-4">
+                <span class="pill"></span>
+                <a class="img" href="#" title="Introduction"><i class="fas fa-address-card fa-lg"></i></a>
+            </div>
+            <div class="guild active">
+                <span class="pill"></span>
+                <a class="img" href="/status.html"><i class="fas fa-plug fa-lg"></i></a>
+            </div>
+            <div class="guild">
+                <span class="pill"></span>
+                <a class="img" href="https://sharex.cloud/"><i class="fas fa-cloud fa-lg"></i></a>
+            </div>
+            <div class="guild">
+                <span class="pill"></span>
+                <a class="img" href="https://discord.gg/vs7YKg6BKq"><i class="fab fa-discord fa-lg"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <section class="section is-large">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-4">
+                        <p><img draggable="false"
+                                src="https://lanyard-profile-readme.vercel.app/api/691386641125867601?bg=36393f&amp;borderRadius=10px"
+                                alt="Discord Presence"></p>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <script>
+        async function api() {
+
+            const indicator = document.getElementById('indicator');
+            const res = await fetch('https://api.lanyard.rest/v1/users/691386641125867601');
+            const api = await res.json();
+
+            if (api.data.discord_status === 'dnd') {
+                indicator.style.backgroundColor = '#ff3a3b'
+            } else if (api.data.discord_status === 'online') {
+                indicator.style.backgroundColor = '#38e654'
+            } else if (api.data.discord_status === 'idle') {
+                indicator.style.backgroundColor = '#faa61a'
+            } else if (api.data.discord_status === 'offline') {
+                indicator.style.backgroundColor = '#747f8d'
+            }
+
+            document.getElementById
+        };
+        api()
+    </script>
+
+</body>
+
+</html>
