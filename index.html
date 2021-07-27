@@ -97,55 +97,6 @@
             document.getElementById
         };
         api();
-        (function () {
-            var o = {
-                browser: 'other',
-                browserVersion: 0,
-                os: 'other',
-                osVersion: 0,
-                mobile: false,
-                canUse: null
-            }, ua = navigator.userAgent, a, i;
-            a = [['firefox', /Firefox\/([0-9\.]+)/], ['edge', /Edge\/([0-9\.]+)/], ['safari', /Version\/([0-9\.]+).+Safari/], ['chrome', /Chrome\/([0-9\.]+)/], ['chrome', /CriOS\/([0-9\.]+)/], ['ie', /Trident\/.+rv:([0-9]+)/]];
-            for (i = 0; i < a.length; i++) {
-                if (ua.match(a[i][1])) {
-                    o.browser = a[i][0];
-                    o.browserVersion = parseFloat(RegExp.$1);
-                    break;
-                }
-            }
-            a = [['ios', /([0-9_]+) like Mac OS X/, function (v) {
-                return v.replace('_', '.').replace('_', '');
-            }
-            ], ['ios', /CPU like Mac OS X/, function (v) {
-                return 0
-            }
-            ], ['ios', /iPad; CPU/, function (v) {
-                return 0
-            }
-            ], ['android', /Android ([0-9\.]+)/, null], ['mac', /Macintosh.+Mac OS X ([0-9_]+)/, function (v) {
-                return v.replace('_', '.').replace('_', '');
-            }
-            ], ['windows', /Windows NT ([0-9\.]+)/, null], ['undefined', /Undefined/, null],];
-            for (i = 0; i < a.length; i++) {
-                if (ua.match(a[i][1])) {
-                    o.os = a[i][0];
-                    o.osVersion = parseFloat(a[i][2] ? (a[i][2])(RegExp.$1) : RegExp.$1);
-                    break;
-                }
-            }
-            if (o.os == 'mac' && ('ontouchstart' in window) && ((screen.width == 1024 && screen.height == 1366) || (screen.width == 834 && screen.height == 1112) || (screen.width == 810 && screen.height == 1080) || (screen.width == 768 && screen.height == 1024)))
-                o.os = 'ios';
-            o.mobile = (o.os == 'android' || o.os == 'ios');
-            var _canUse = document.createElement('div');
-            o.canUse = function (p) {
-                var e = _canUse.style
-                    , up = p.charAt(0).toUpperCase() + p.slice(1);
-                return (p in e || ('Moz' + up) in e || ('Webkit' + up) in e || ('O' + up) in e || ('ms' + up) in e);
-            }
-                ;
-            return o;
-        }())
     </script>
 
 </body>
