@@ -94,18 +94,18 @@
 
             document.getElementById
         };
-        api()
-            (function() {
-                var on = addEventListener
-                  , $ = function(q) {
+        api();
+        (function () {
+            var on = addEventListener
+                , $ = function (q) {
                     return document.querySelector(q)
                 }
-                  , $$ = function(q) {
+                , $$ = function (q) {
                     return document.querySelectorAll(q)
                 }
-                  , $body = document.body
-                  , $inner = $('.inner')
-                  , client = (function() {
+                , $body = document.body
+                , $inner = $('.inner')
+                , client = (function () {
                     var o = {
                         browser: 'other',
                         browserVersion: 0,
@@ -122,19 +122,19 @@
                             break;
                         }
                     }
-                    a = [['ios', /([0-9_]+) like Mac OS X/, function(v) {
+                    a = [['ios', /([0-9_]+) like Mac OS X/, function (v) {
                         return v.replace('_', '.').replace('_', '');
                     }
-                    ], ['ios', /CPU like Mac OS X/, function(v) {
+                    ], ['ios', /CPU like Mac OS X/, function (v) {
                         return 0
                     }
-                    ], ['ios', /iPad; CPU/, function(v) {
+                    ], ['ios', /iPad; CPU/, function (v) {
                         return 0
                     }
-                    ], ['android', /Android ([0-9\.]+)/, null], ['mac', /Macintosh.+Mac OS X ([0-9_]+)/, function(v) {
+                    ], ['android', /Android ([0-9\.]+)/, null], ['mac', /Macintosh.+Mac OS X ([0-9_]+)/, function (v) {
                         return v.replace('_', '.').replace('_', '');
                     }
-                    ], ['windows', /Windows NT ([0-9\.]+)/, null], ['undefined', /Undefined/, null], ];
+                    ], ['windows', /Windows NT ([0-9\.]+)/, null], ['undefined', /Undefined/, null],];
                     for (i = 0; i < a.length; i++) {
                         if (ua.match(a[i][1])) {
                             o.os = a[i][0];
@@ -142,19 +142,19 @@
                             break;
                         }
                     }
-                    if (o.os == 'mac' && ('ontouchstart'in window) && ((screen.width == 1024 && screen.height == 1366) || (screen.width == 834 && screen.height == 1112) || (screen.width == 810 && screen.height == 1080) || (screen.width == 768 && screen.height == 1024)))
+                    if (o.os == 'mac' && ('ontouchstart' in window) && ((screen.width == 1024 && screen.height == 1366) || (screen.width == 834 && screen.height == 1112) || (screen.width == 810 && screen.height == 1080) || (screen.width == 768 && screen.height == 1024)))
                         o.os = 'ios';
                     o.mobile = (o.os == 'android' || o.os == 'ios');
                     var _canUse = document.createElement('div');
-                    o.canUse = function(p) {
+                    o.canUse = function (p) {
                         var e = _canUse.style
-                          , up = p.charAt(0).toUpperCase() + p.slice(1);
-                        return (p in e || ('Moz' + up)in e || ('Webkit' + up)in e || ('O' + up)in e || ('ms' + up)in e);
+                            , up = p.charAt(0).toUpperCase() + p.slice(1);
+                        return (p in e || ('Moz' + up) in e || ('Webkit' + up) in e || ('O' + up) in e || ('ms' + up) in e);
                     }
-                    ;
+                        ;
                     return o;
                 }())
-                  , trigger = function(t) {
+                , trigger = function (t) {
                     if (client.browser == 'ie') {
                         var e = document.createEvent('Event');
                         e.initEvent(t, false, true);
@@ -162,13 +162,13 @@
                     } else
                         dispatchEvent(new Event(t));
                 }
-                  , cssRules = function(selectorText) {
-                    var ss = document.styleSheets, a = [], f = function(s) {
+                , cssRules = function (selectorText) {
+                    var ss = document.styleSheets, a = [], f = function (s) {
                         var r = s.cssRules, i;
                         for (i = 0; i < r.length; i++) {
-                            if (r[i]instanceof CSSMediaRule && matchMedia(r[i].conditionText).matches)
+                            if (r[i] instanceof CSSMediaRule && matchMedia(r[i].conditionText).matches)
                                 (f)(r[i]);
-                            else if (r[i]instanceof CSSStyleRule && r[i].selectorText == selectorText)
+                            else if (r[i] instanceof CSSStyleRule && r[i].selectorText == selectorText)
                                 a.push(r[i]);
                         }
                     }, x, i;
@@ -176,7 +176,7 @@
                         f(ss[i]);
                     return a;
                 }
-                  , thisHash = function() {
+                , thisHash = function () {
                     var h = location.hash ? location.hash.substring(1) : null, a;
                     if (!h)
                         return null;
@@ -192,29 +192,29 @@
                         h = h.toLowerCase();
                     return h;
                 }
-                  , scrollToElement = function(e, style, duration) {
+                , scrollToElement = function (e, style, duration) {
                     var y, cy, dy, start, easing, offset, f;
                     if (!e)
                         y = 0;
                     else {
                         offset = (e.dataset.scrollOffset ? parseInt(e.dataset.scrollOffset) : 0) * parseFloat(getComputedStyle(document.documentElement).fontSize);
                         switch (e.dataset.scrollBehavior ? e.dataset.scrollBehavior : 'default') {
-                        case 'default':
-                        default:
-                            y = e.offsetTop + offset;
-                            break;
-                        case 'center':
-                            if (e.offsetHeight < window.innerHeight)
-                                y = e.offsetTop - ((window.innerHeight - e.offsetHeight) / 2) + offset;
-                            else
-                                y = e.offsetTop - offset;
-                            break;
-                        case 'previous':
-                            if (e.previousElementSibling)
-                                y = e.previousElementSibling.offsetTop + e.previousElementSibling.offsetHeight + offset;
-                            else
+                            case 'default':
+                            default:
                                 y = e.offsetTop + offset;
-                            break;
+                                break;
+                            case 'center':
+                                if (e.offsetHeight < window.innerHeight)
+                                    y = e.offsetTop - ((window.innerHeight - e.offsetHeight) / 2) + offset;
+                                else
+                                    y = e.offsetTop - offset;
+                                break;
+                            case 'previous':
+                                if (e.previousElementSibling)
+                                    y = e.previousElementSibling.offsetTop + e.previousElementSibling.offsetHeight + offset;
+                                else
+                                    y = e.offsetTop + offset;
+                                break;
                         }
                     }
                     if (!style)
@@ -229,20 +229,20 @@
                     cy = window.scrollY;
                     dy = y - cy;
                     switch (style) {
-                    case 'linear':
-                        easing = function(t) {
-                            return t
-                        }
-                        ;
-                        break;
-                    case 'smooth':
-                        easing = function(t) {
-                            return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
-                        }
-                        ;
-                        break;
+                        case 'linear':
+                            easing = function (t) {
+                                return t
+                            }
+                                ;
+                            break;
+                        case 'smooth':
+                            easing = function (t) {
+                                return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
+                            }
+                                ;
+                            break;
                     }
-                    f = function() {
+                    f = function () {
                         var t = Date.now() - start;
                         if (t >= duration)
                             window.scroll(0, y);
@@ -251,13 +251,13 @@
                             requestAnimationFrame(f);
                         }
                     }
-                    ;
+                        ;
                     f();
                 }
-                  , scrollToTop = function() {
+                , scrollToTop = function () {
                     scrollToElement(null);
                 }
-                  , loadElements = function(parent) {
+                , loadElements = function (parent) {
                     var a, e, x, i;
                     a = parent.querySelectorAll('iframe[data-src]:not([data-src=""])');
                     for (i = 0; i < a.length; i++) {
@@ -272,16 +272,16 @@
                     e = parent.querySelector('[data-autofocus="1"]');
                     x = e ? e.tagName : null;
                     switch (x) {
-                    case 'FORM':
-                        e = e.querySelector('.field input, .field select, .field textarea');
-                        if (e)
-                            e.focus();
-                        break;
-                    default:
-                        break;
+                        case 'FORM':
+                            e = e.querySelector('.field input, .field select, .field textarea');
+                            if (e)
+                                e.focus();
+                            break;
+                        default:
+                            break;
                     }
                 }
-                  , unloadElements = function(parent) {
+                , unloadElements = function (parent) {
                     var a, e, x, i;
                     a = parent.querySelectorAll('iframe[data-src=""]');
                     for (i = 0; i < a.length; i++) {
@@ -299,241 +299,241 @@
                     if (e)
                         e.blur();
                 };
-                window._scrollToTop = scrollToTop;
-                var thisURL = function() {
-                    return window.location.href.replace(window.location.search, '').replace(/#$/, '');
-                };
-                var getVar = function(name) {
-                    var a = window.location.search.substring(1).split('&'), b, k;
-                    for (k in a) {
-                        b = a[k].split('=');
-                        if (b[0] == name)
-                            return b[1];
+            window._scrollToTop = scrollToTop;
+            var thisURL = function () {
+                return window.location.href.replace(window.location.search, '').replace(/#$/, '');
+            };
+            var getVar = function (name) {
+                var a = window.location.search.substring(1).split('&'), b, k;
+                for (k in a) {
+                    b = a[k].split('=');
+                    if (b[0] == name)
+                        return b[1];
+                }
+                return null;
+            };
+            var errors = {
+                handle: function (handler) {
+                    window.onerror = function (message, url, line, column, error) {
+                        (handler)(error.message);
+                        return true;
                     }
-                    return null;
-                };
-                var errors = {
-                    handle: function(handler) {
-                        window.onerror = function(message, url, line, column, error) {
-                            (handler)(error.message);
-                            return true;
-                        }
                         ;
-                    },
-                    unhandle: function() {
-                        window.onerror = null;
-                    }
-                };
-                on('load', function() {
-                    setTimeout(function() {
-                        $body.className = $body.className.replace(/\bis-loading\b/, 'is-playing');
-                        setTimeout(function() {
-                            $body.className = $body.className.replace(/\bis-playing\b/, 'is-ready');
-                        }, 2250);
-                    }, 100);
-                });
-                loadElements(document.body);
-                var style, sheet, rule;
-                style = document.createElement('style');
-                style.appendChild(document.createTextNode(''));
-                document.head.appendChild(style);
-                sheet = style.sheet;
-                if (client.os == 'android') {
-                    (function() {
+                },
+                unhandle: function () {
+                    window.onerror = null;
+                }
+            };
+            on('load', function () {
+                setTimeout(function () {
+                    $body.className = $body.className.replace(/\bis-loading\b/, 'is-playing');
+                    setTimeout(function () {
+                        $body.className = $body.className.replace(/\bis-playing\b/, 'is-ready');
+                    }, 2250);
+                }, 100);
+            });
+            loadElements(document.body);
+            var style, sheet, rule;
+            style = document.createElement('style');
+            style.appendChild(document.createTextNode(''));
+            document.head.appendChild(style);
+            sheet = style.sheet;
+            if (client.os == 'android') {
+                (function () {
+                    sheet.insertRule('body::after { }', 0);
+                    rule = sheet.cssRules[0];
+                    var f = function () {
+                        rule.style.cssText = 'height: ' + (Math.max(screen.width, screen.height)) + 'px';
+                    };
+                    on('load', f);
+                    on('orientationchange', f);
+                    on('touchmove', f);
+                }
+                )();
+                $body.classList.add('is-touch');
+            } else if (client.os == 'ios') {
+                if (client.osVersion <= 11)
+                    (function () {
                         sheet.insertRule('body::after { }', 0);
                         rule = sheet.cssRules[0];
-                        var f = function() {
-                            rule.style.cssText = 'height: ' + (Math.max(screen.width, screen.height)) + 'px';
-                        };
-                        on('load', f);
-                        on('orientationchange', f);
-                        on('touchmove', f);
+                        rule.style.cssText = '-webkit-transform: scale(1.0)';
                     }
                     )();
-                    $body.classList.add('is-touch');
-                } else if (client.os == 'ios') {
-                    if (client.osVersion <= 11)
-                        (function() {
-                            sheet.insertRule('body::after { }', 0);
-                            rule = sheet.cssRules[0];
-                            rule.style.cssText = '-webkit-transform: scale(1.0)';
-                        }
-                        )();
-                    if (client.osVersion <= 11)
-                        (function() {
-                            sheet.insertRule('body.ios-focus-fix::before { }', 0);
-                            rule = sheet.cssRules[0];
-                            rule.style.cssText = 'height: calc(100% + 60px)';
-                            on('focus', function(event) {
-                                $body.classList.add('ios-focus-fix');
-                            }, true);
-                            on('blur', function(event) {
-                                $body.classList.remove('ios-focus-fix');
-                            }, true);
-                        }
-                        )();
-                    $body.classList.add('is-touch');
-                } else if (client.browser == 'ie') {
-                    if (!('matches'in Element.prototype))
-                        Element.prototype.matches = (Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector);
-                    (function() {
-                        var a = cssRules('body::before'), r;
-                        if (a.length > 0) {
-                            r = a[0];
-                            if (r.style.width.match('calc')) {
-                                r.style.opacity = 0.9999;
-                                setTimeout(function() {
-                                    r.style.opacity = 1;
-                                }, 100);
-                            } else {
-                                document.styleSheets[0].addRule('body::before', 'content: none !important;');
-                                $body.style.backgroundImage = r.style.backgroundImage.replace('url("images/', 'url("assets/images/');
-                                $body.style.backgroundPosition = r.style.backgroundPosition;
-                                $body.style.backgroundRepeat = r.style.backgroundRepeat;
-                                $body.style.backgroundColor = r.style.backgroundColor;
-                                $body.style.backgroundAttachment = 'fixed';
-                                $body.style.backgroundSize = r.style.backgroundSize;
-                            }
-                        }
+                if (client.osVersion <= 11)
+                    (function () {
+                        sheet.insertRule('body.ios-focus-fix::before { }', 0);
+                        rule = sheet.cssRules[0];
+                        rule.style.cssText = 'height: calc(100% + 60px)';
+                        on('focus', function (event) {
+                            $body.classList.add('ios-focus-fix');
+                        }, true);
+                        on('blur', function (event) {
+                            $body.classList.remove('ios-focus-fix');
+                        }, true);
                     }
                     )();
-                    (function() {
-                        var t, f;
-                        f = function() {
-                            var mh, h, s, xx, x, i;
-                            x = $('#wrapper');
-                            x.style.height = 'auto';
-                            if (x.scrollHeight <= innerHeight)
-                                x.style.height = '100vh';
-                            xx = $$('.container.full');
-                            for (i = 0; i < xx.length; i++) {
-                                x = xx[i];
-                                s = getComputedStyle(x);
-                                x.style.minHeight = '';
-                                x.style.height = '';
-                                mh = s.minHeight;
-                                x.style.minHeight = 0;
-                                x.style.height = '';
-                                h = s.height;
-                                if (mh == 0)
-                                    continue;
-                                x.style.height = (h > mh ? 'auto' : mh);
-                            }
+                $body.classList.add('is-touch');
+            } else if (client.browser == 'ie') {
+                if (!('matches' in Element.prototype))
+                    Element.prototype.matches = (Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector);
+                (function () {
+                    var a = cssRules('body::before'), r;
+                    if (a.length > 0) {
+                        r = a[0];
+                        if (r.style.width.match('calc')) {
+                            r.style.opacity = 0.9999;
+                            setTimeout(function () {
+                                r.style.opacity = 1;
+                            }, 100);
+                        } else {
+                            document.styleSheets[0].addRule('body::before', 'content: none !important;');
+                            $body.style.backgroundImage = r.style.backgroundImage.replace('url("images/', 'url("assets/images/');
+                            $body.style.backgroundPosition = r.style.backgroundPosition;
+                            $body.style.backgroundRepeat = r.style.backgroundRepeat;
+                            $body.style.backgroundColor = r.style.backgroundColor;
+                            $body.style.backgroundAttachment = 'fixed';
+                            $body.style.backgroundSize = r.style.backgroundSize;
                         }
-                        ;
-                        (f)();
-                        on('resize', function() {
-                            clearTimeout(t);
-                            t = setTimeout(f, 250);
-                        });
-                        on('load', f);
                     }
-                    )();
-                } else if (client.browser == 'edge') {
-                    (function() {
-                        var xx = $$('.container > .inner > div:last-child'), x, y, i;
+                }
+                )();
+                (function () {
+                    var t, f;
+                    f = function () {
+                        var mh, h, s, xx, x, i;
+                        x = $('#wrapper');
+                        x.style.height = 'auto';
+                        if (x.scrollHeight <= innerHeight)
+                            x.style.height = '100vh';
+                        xx = $$('.container.full');
                         for (i = 0; i < xx.length; i++) {
                             x = xx[i];
-                            y = getComputedStyle(x.parentNode);
-                            if (y.display != 'flex' && y.display != 'inline-flex')
+                            s = getComputedStyle(x);
+                            x.style.minHeight = '';
+                            x.style.height = '';
+                            mh = s.minHeight;
+                            x.style.minHeight = 0;
+                            x.style.height = '';
+                            h = s.height;
+                            if (mh == 0)
                                 continue;
-                            x.style.marginLeft = '-1px';
+                            x.style.height = (h > mh ? 'auto' : mh);
                         }
                     }
-                    )();
+                        ;
+                    (f)();
+                    on('resize', function () {
+                        clearTimeout(t);
+                        t = setTimeout(f, 250);
+                    });
+                    on('load', f);
                 }
-                if (!client.canUse('object-fit')) {
-                    (function() {
-                        var xx = $$('.image[data-position]'), x, w, c, i, src;
-                        for (i = 0; i < xx.length; i++) {
-                            x = xx[i];
-                            c = x.firstElementChild;
-                            if (c.tagName != 'IMG') {
-                                w = c;
-                                c = c.firstElementChild;
-                            }
-                            if (c.parentNode.classList.contains('deferred')) {
-                                c.parentNode.classList.remove('deferred');
-                                src = c.getAttribute('data-src');
-                                c.removeAttribute('data-src');
-                            } else
-                                src = c.getAttribute('src');
-                            c.style['backgroundImage'] = 'url(\'' + src + '\')';
-                            c.style['backgroundSize'] = 'cover';
-                            c.style['backgroundPosition'] = x.dataset.position;
-                            c.style['backgroundRepeat'] = 'no-repeat';
-                            c.src = 'data:image/svg+xml;charset=utf8,' + escape('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" viewBox="0 0 1 1"></svg>');
-                            if (x.classList.contains('full') && (x.parentNode && x.parentNode.classList.contains('full')) && (x.parentNode.parentNode && x.parentNode.parentNode.parentNode && x.parentNode.parentNode.parentNode.classList.contains('container')) && x.parentNode.children.length == 1) {
-                                (function(x, w) {
-                                    var p = x.parentNode.parentNode, f = function() {
-                                        x.style['height'] = '0px';
-                                        clearTimeout(t);
-                                        t = setTimeout(function() {
-                                            if (getComputedStyle(p).flexDirection == 'row') {
-                                                if (w)
-                                                    w.style['height'] = '100%';
-                                                x.style['height'] = (p.scrollHeight + 1) + 'px';
-                                            } else {
-                                                if (w)
-                                                    w.style['height'] = 'auto';
-                                                x.style['height'] = 'auto';
-                                            }
-                                        }, 125);
-                                    }, t;
-                                    on('resize', f);
-                                    on('load', f);
-                                    (f)();
-                                }
-                                )(x, w);
-                            }
-                        }
+                )();
+            } else if (client.browser == 'edge') {
+                (function () {
+                    var xx = $$('.container > .inner > div:last-child'), x, y, i;
+                    for (i = 0; i < xx.length; i++) {
+                        x = xx[i];
+                        y = getComputedStyle(x.parentNode);
+                        if (y.display != 'flex' && y.display != 'inline-flex')
+                            continue;
+                        x.style.marginLeft = '-1px';
                     }
-                    )();
-                    (function() {
-                        var xx = $$('.gallery img'), x, p, i, src;
-                        for (i = 0; i < xx.length; i++) {
-                            x = xx[i];
-                            p = x.parentNode;
-                            if (p.classList.contains('deferred')) {
-                                p.classList.remove('deferred');
-                                src = x.getAttribute('data-src');
-                            } else
-                                src = x.getAttribute('src');
-                            p.style['backgroundImage'] = 'url(\'' + src + '\')';
-                            p.style['backgroundSize'] = 'cover';
-                            p.style['backgroundPosition'] = 'center';
-                            p.style['backgroundRepeat'] = 'no-repeat';
-                            x.style['opacity'] = '0';
-                        }
-                    }
-                    )();
                 }
-                var scrollEvents = {
-                    items: [],
-                    add: function(o) {
-                        this.items.push({
-                            element: o.element,
-                            enter: ('enter'in o ? o.enter : null),
-                            leave: ('leave'in o ? o.leave : null),
-                            mode: ('mode'in o ? o.mode : 1),
-                            offset: ('offset'in o ? o.offset : 0),
-                            state: false,
-                        });
-                    },
-                    handler: function() {
-                        var height = document.documentElement.clientHeight
-                          , top = (client.os == 'ios' ? document.body.scrollTop : document.documentElement.scrollTop)
-                          , bottom = top + height;
-                        scrollEvents.items.forEach(function(item) {
-                            var bcr, elementTop, elementBottom, state, a, b;
-                            if (!item.enter && !item.leave)
-                                return true;
-                            if (item.element.offsetParent === null)
-                                return true;
-                            bcr = item.element.getBoundingClientRect();
-                            elementTop = top + Math.floor(bcr.top);
-                            elementBottom = elementTop + bcr.height;
-                            switch (item.mode) {
+                )();
+            }
+            if (!client.canUse('object-fit')) {
+                (function () {
+                    var xx = $$('.image[data-position]'), x, w, c, i, src;
+                    for (i = 0; i < xx.length; i++) {
+                        x = xx[i];
+                        c = x.firstElementChild;
+                        if (c.tagName != 'IMG') {
+                            w = c;
+                            c = c.firstElementChild;
+                        }
+                        if (c.parentNode.classList.contains('deferred')) {
+                            c.parentNode.classList.remove('deferred');
+                            src = c.getAttribute('data-src');
+                            c.removeAttribute('data-src');
+                        } else
+                            src = c.getAttribute('src');
+                        c.style['backgroundImage'] = 'url(\'' + src + '\')';
+                        c.style['backgroundSize'] = 'cover';
+                        c.style['backgroundPosition'] = x.dataset.position;
+                        c.style['backgroundRepeat'] = 'no-repeat';
+                        c.src = 'data:image/svg+xml;charset=utf8,' + escape('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" viewBox="0 0 1 1"></svg>');
+                        if (x.classList.contains('full') && (x.parentNode && x.parentNode.classList.contains('full')) && (x.parentNode.parentNode && x.parentNode.parentNode.parentNode && x.parentNode.parentNode.parentNode.classList.contains('container')) && x.parentNode.children.length == 1) {
+                            (function (x, w) {
+                                var p = x.parentNode.parentNode, f = function () {
+                                    x.style['height'] = '0px';
+                                    clearTimeout(t);
+                                    t = setTimeout(function () {
+                                        if (getComputedStyle(p).flexDirection == 'row') {
+                                            if (w)
+                                                w.style['height'] = '100%';
+                                            x.style['height'] = (p.scrollHeight + 1) + 'px';
+                                        } else {
+                                            if (w)
+                                                w.style['height'] = 'auto';
+                                            x.style['height'] = 'auto';
+                                        }
+                                    }, 125);
+                                }, t;
+                                on('resize', f);
+                                on('load', f);
+                                (f)();
+                            }
+                            )(x, w);
+                        }
+                    }
+                }
+                )();
+                (function () {
+                    var xx = $$('.gallery img'), x, p, i, src;
+                    for (i = 0; i < xx.length; i++) {
+                        x = xx[i];
+                        p = x.parentNode;
+                        if (p.classList.contains('deferred')) {
+                            p.classList.remove('deferred');
+                            src = x.getAttribute('data-src');
+                        } else
+                            src = x.getAttribute('src');
+                        p.style['backgroundImage'] = 'url(\'' + src + '\')';
+                        p.style['backgroundSize'] = 'cover';
+                        p.style['backgroundPosition'] = 'center';
+                        p.style['backgroundRepeat'] = 'no-repeat';
+                        x.style['opacity'] = '0';
+                    }
+                }
+                )();
+            }
+            var scrollEvents = {
+                items: [],
+                add: function (o) {
+                    this.items.push({
+                        element: o.element,
+                        enter: ('enter' in o ? o.enter : null),
+                        leave: ('leave' in o ? o.leave : null),
+                        mode: ('mode' in o ? o.mode : 1),
+                        offset: ('offset' in o ? o.offset : 0),
+                        state: false,
+                    });
+                },
+                handler: function () {
+                    var height = document.documentElement.clientHeight
+                        , top = (client.os == 'ios' ? document.body.scrollTop : document.documentElement.scrollTop)
+                        , bottom = top + height;
+                    scrollEvents.items.forEach(function (item) {
+                        var bcr, elementTop, elementBottom, state, a, b;
+                        if (!item.enter && !item.leave)
+                            return true;
+                        if (item.element.offsetParent === null)
+                            return true;
+                        bcr = item.element.getBoundingClientRect();
+                        elementTop = top + Math.floor(bcr.top);
+                        elementBottom = elementTop + bcr.height;
+                        switch (item.mode) {
                             case 1:
                             default:
                                 state = (bottom > (elementTop - item.offset) && top < (elementBottom + item.offset));
@@ -547,84 +547,84 @@
                                 b = top + (height * 0.75);
                                 state = (b > (elementTop - item.offset) && a < (elementBottom + item.offset));
                                 break;
-                            }
-                            if (state != item.state) {
-                                item.state = state;
-                                if (item.state) {
-                                    if (item.enter) {
-                                        (item.enter).apply(item.element);
-                                        if (!item.leave)
-                                            item.enter = null;
-                                    }
-                                } else {
-                                    if (item.leave) {
-                                        (item.leave).apply(item.element);
-                                        if (!item.enter)
-                                            item.leave = null;
-                                    }
+                        }
+                        if (state != item.state) {
+                            item.state = state;
+                            if (item.state) {
+                                if (item.enter) {
+                                    (item.enter).apply(item.element);
+                                    if (!item.leave)
+                                        item.enter = null;
+                                }
+                            } else {
+                                if (item.leave) {
+                                    (item.leave).apply(item.element);
+                                    if (!item.enter)
+                                        item.leave = null;
                                 }
                             }
-                        });
-                    },
-                    init: function() {
-                        on('load', this.handler);
-                        on('resize', this.handler);
-                        on('scroll', this.handler);
-                        (this.handler)();
-                    }
-                };
-                scrollEvents.init();
-                (function() {
-                    var items = $$('.deferred'), loadHandler, enterHandler;
-                    if (!('forEach'in NodeList.prototype))
-                        NodeList.prototype.forEach = Array.prototype.forEach;
-                    loadHandler = function() {
-                        var i = this
-                          , p = this.parentElement;
-                        if (i.dataset.src !== 'done')
-                            return;
-                        if (Date.now() - i._startLoad < 375) {
-                            p.classList.remove('loading');
-                            p.style.backgroundImage = 'none';
-                            i.style.transition = '';
-                            i.style.opacity = 1;
-                        } else {
-                            p.classList.remove('loading');
-                            i.style.opacity = 1;
-                            setTimeout(function() {
-                                i.style.backgroundImage = 'none';
-                            }, 375);
                         }
-                    }
-                    ;
-                    enterHandler = function() {
-                        var i = this, p = this.parentElement, src;
-                        src = i.dataset.src;
-                        i.dataset.src = 'done';
-                        p.classList.add('loading');
-                        i._startLoad = Date.now();
-                        i.src = src;
-                    }
-                    ;
-                    items.forEach(function(p) {
-                        var i = p.firstElementChild;
-                        p.style.backgroundImage = 'url(' + i.src + ')';
-                        p.style.backgroundSize = '100% 100%';
-                        p.style.backgroundPosition = 'top left';
-                        p.style.backgroundRepeat = 'no-repeat';
-                        i.style.opacity = 0;
-                        i.style.transition = 'opacity 0.375s ease-in-out';
-                        i.addEventListener('load', loadHandler);
-                        scrollEvents.add({
-                            element: i,
-                            enter: enterHandler,
-                            offset: 250
-                        });
                     });
+                },
+                init: function () {
+                    on('load', this.handler);
+                    on('resize', this.handler);
+                    on('scroll', this.handler);
+                    (this.handler)();
                 }
-                )();
+            };
+            scrollEvents.init();
+            (function () {
+                var items = $$('.deferred'), loadHandler, enterHandler;
+                if (!('forEach' in NodeList.prototype))
+                    NodeList.prototype.forEach = Array.prototype.forEach;
+                loadHandler = function () {
+                    var i = this
+                        , p = this.parentElement;
+                    if (i.dataset.src !== 'done')
+                        return;
+                    if (Date.now() - i._startLoad < 375) {
+                        p.classList.remove('loading');
+                        p.style.backgroundImage = 'none';
+                        i.style.transition = '';
+                        i.style.opacity = 1;
+                    } else {
+                        p.classList.remove('loading');
+                        i.style.opacity = 1;
+                        setTimeout(function () {
+                            i.style.backgroundImage = 'none';
+                        }, 375);
+                    }
+                }
+                    ;
+                enterHandler = function () {
+                    var i = this, p = this.parentElement, src;
+                    src = i.dataset.src;
+                    i.dataset.src = 'done';
+                    p.classList.add('loading');
+                    i._startLoad = Date.now();
+                    i.src = src;
+                }
+                    ;
+                items.forEach(function (p) {
+                    var i = p.firstElementChild;
+                    p.style.backgroundImage = 'url(' + i.src + ')';
+                    p.style.backgroundSize = '100% 100%';
+                    p.style.backgroundPosition = 'top left';
+                    p.style.backgroundRepeat = 'no-repeat';
+                    i.style.opacity = 0;
+                    i.style.transition = 'opacity 0.375s ease-in-out';
+                    i.addEventListener('load', loadHandler);
+                    scrollEvents.add({
+                        element: i,
+                        enter: enterHandler,
+                        offset: 250
+                    });
+                });
             }
             )();
+        }
+        )();
     </script>
 
 </body>
