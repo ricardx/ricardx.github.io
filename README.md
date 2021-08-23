@@ -1,1 +1,1 @@
-made with https://ui.fosscord.com/ and https://lanyard.rest/
+made with [Tailwind CSS](https://tailwindcss.com/)
